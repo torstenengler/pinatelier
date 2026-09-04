@@ -27,4 +27,31 @@
 </main>
 <footer><div><a class="brand" href="/"><span class="mark">PA</span><span>Pin Atelier</span></a><p>Kuratierte Ideen. Mit Geschmack ausgewählt.</p></div><div class="footer-links"><a href="affiliate-hinweis/">Affiliate-Hinweis</a><a href="impressum/">Impressum</a><a href="datenschutz/">Datenschutz</a></div><small>© 2026 Pin Atelier</small></footer>
 <script src="app.js"></script>
+<style>
+#pinterest-consent{position:fixed;right:20px;bottom:20px;z-index:20;max-width:390px;padding:18px 20px;background:#20201e;color:#f5f1ea;box-shadow:0 12px 30px rgba(0,0,0,.18);font-size:12px;line-height:1.5}
+#pinterest-consent p{margin:0 0 12px}#pinterest-consent a{color:#fff;text-decoration:underline}
+#pinterest-consent button{border:1px solid #f5f1ea;background:transparent;color:#f5f1ea;padding:8px 11px;margin-right:7px;font:inherit;cursor:pointer}
+#pinterest-consent button:first-of-type{background:#f5f1ea;color:#20201e}
+</style>
+<div id="pinterest-consent" role="dialog" aria-label="Marketing-Einwilligung">
+<p><strong>Mehr Inspiration, wenn du möchtest.</strong><br>Wir würden gern Pinterest-Marketingmessung aktivieren. Dabei können Daten an Pinterest übermittelt werden. <a href="datenschutz/">Datenschutz</a></p>
+<button id="pinterest-accept" type="button">Erlauben</button><button id="pinterest-deny" type="button">Nein, danke</button>
+</div>
+<script>
+(function(){
+  var key='pinatelierMarketingConsent';
+  function loadPinterest(){
+    if(window.pintrk)return;
+    window.pintrk=function(){window.pintrk.queue.push(Array.prototype.slice.call(arguments))};
+    var n=window.pintrk;n.queue=[];n.version='3.0';
+    var t=document.createElement('script');t.async=true;t.src='https://s.pinimg.com/ct/core.js';
+    var r=document.getElementsByTagName('script')[0];r.parentNode.insertBefore(t,r);
+    pintrk('load','2614306645876');pintrk('page');
+  }
+  var banner=document.getElementById('pinterest-consent');
+  if(localStorage.getItem(key)==='granted'){banner.remove();loadPinterest()}
+  document.getElementById('pinterest-accept').onclick=function(){localStorage.setItem(key,'granted');banner.remove();loadPinterest()};
+  document.getElementById('pinterest-deny').onclick=function(){localStorage.setItem(key,'denied');banner.remove()};
+})();
+</script>
 </body></html>
