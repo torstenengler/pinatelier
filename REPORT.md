@@ -1,5 +1,11 @@
 # Pin Atelier – Umsetzung vom 6. September 2026
 
+## Nachbesserung: Bildschirm-Anpassung und alte Browserdateien
+
+Der nachgereichte Safari-Screenshot zeigt neue HTML-Bereiche zusammen mit Merkmalen des alten Stylesheets und der alten Skript-Fehlermeldung. Die bisher unveränderten Dateinamen ermöglichten diese Mischung bei zwischengespeicherten Dateien. Alle HTML-Seiten referenzieren jetzt CSS und JavaScript mit inhaltsabhängigen Dateinamen. Ein Regressionstest liefert unter den alten Dateinamen absichtlich fehlerhafte Vorgängerversionen aus und prüft, dass die Seite trotzdem die neuen Dateien benutzt.
+
+Zusätzlich wurden Überschriften begrenzt, Textgrößen vereinheitlicht und Raster/Filter bei 320, 390, 768, 1024, 1440 und 1920 Pixeln geprüft. Die bisherigen Affiliate-Links und Kataloginhalte bleiben unverändert. Der Test nutzt Chrome; eine Prüfung im tatsächlichen Safari-Profil des Nutzers wurde nicht durchgeführt.
+
 ## Umgesetzt
 
 - Produktbezogener Einstieg mit vorhandenem PH-5-Pin, echtem ursprünglichem Amazon-Affiliate-Link und passender Vergleichsseite; kein Manifesto-Abschnitt.

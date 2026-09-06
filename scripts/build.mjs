@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import path from 'node:path';
 const root=path.resolve(import.meta.dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
@@ -56,3 +57,19 @@ write('sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http
 write('llms.txt','# Pin Atelier\n\nDeutschsprachige redaktionelle Auswahl von Wohnideen und Alltagsfunden aus Pinterest. Kein Händler, keine eigenen Produkttests. Amazon-Affiliate-Links.\n\n'+pages.map(p=>'- ['+(p==='/'?'Startseite':p.split('/').filter(Boolean).at(-1))+']('+origin+p+')').join('\n')+'\n\nMaßgeblich sind die sichtbaren Seiten und die dort verlinkten Herstellerquellen. Bilder können illustrative Szenen zeigen. Keine Preis- oder Verfügbarkeitsgarantie.\n');
 write('pinterest-landing-map.csv','pin_id,existing_amazon_url,suggested_website_url\n'+pins.map(p=>[p.id,p.link,origin+'/'+category.get(p.id)+'/?utm_source=pinterest&utm_medium=organic_social&utm_campaign=wohnideen&utm_content='+p.id+'#pin-'+p.id].map(v=>'"'+v.replace(/"/g,'""')+'"').join(',')).join('\n')+'\n');
 console.log('Built',pages.length,'indexable pages;',pins.length,'unchanged source pins.');
+// Content-addressed assets prevent new HTML from using cached pre-redesign CSS/JS.
+const assets={};
+for(const name of ['styles.css','app.js','consent.js','measurement.js']){
+ const content=read(name),hash=createHash('sha256').update(content).digest('hex').slice(0,12);
+ const parts=name.split('.'),versioned='assets/'+parts[0]+'.'+hash+'.'+parts[1];
+ write(versioned,content);assets['/'+name]='/'+versioned;
+}
+for(const slug of [...pages,'/impressum/','/datenschutz/','/affiliate-hinweis/']){
+ const file=slug==='/'?'index.html':slug.slice(1)+'index.html';
+ let html=read(file);for(const [from,to] of Object.entries(assets))html=html.replaceAll('"'+from+'"','"'+to+'"');write(file,html);
+}
+// These two hand-authored pages also need the current version after subsequent builds.
+for(const file of ['404.html','measurement.html']){
+ let html=read(file).replace(/\/assets\/(styles|measurement)\.[a-f0-9]+\.(css|js)/g,'/$1.$2');
+ for(const [from,to] of Object.entries(assets))html=html.replaceAll('"'+from+'"','"'+to+'"');write(file,html);
+}
