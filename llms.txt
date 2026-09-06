@@ -1,15 +1,17 @@
 # Pin Atelier
-> Pin Atelier ist eine deutschsprachige kuratierte Empfehlungsseite für Wohnideen, Design, Deko und praktische Lieblingsstücke.
 
-## Website
-- Startseite: https://pinatelier.org/
-- Pinterest-Profil: https://de.pinterest.com/mr_t_builds_mr_t/
-- Themen: Wohnideen, Luxus-Wohnideen, Designleuchten, Möbel, Küche, Ordnung, Balkon und Garten.
+Deutschsprachige redaktionelle Auswahl von Wohnideen und Alltagsfunden aus Pinterest. Kein Händler, keine eigenen Produkttests. Amazon-Affiliate-Links.
 
-## Transparenz
-Einige Produktlinks führen als Affiliate-Links zu Amazon. Bei qualifizierten Käufen kann Pin Atelier eine Provision erhalten; der Preis für Besucher bleibt gleich. Die redaktionelle Auswahl erfolgt nach Design, Nutzen und Alltagstauglichkeit.
+- [Startseite](https://pinatelier.org/)
+- [licht](https://pinatelier.org/licht/)
+- [wohnen](https://pinatelier.org/wohnen/)
+- [kueche](https://pinatelier.org/kueche/)
+- [ordnung](https://pinatelier.org/ordnung/)
+- [balkon-garten](https://pinatelier.org/balkon-garten/)
+- [lifestyle](https://pinatelier.org/lifestyle/)
+- [ratgeber](https://pinatelier.org/ratgeber/)
+- [designleuchten-sideboard](https://pinatelier.org/ratgeber/designleuchten-sideboard/)
+- [pendelleuchten-esstisch](https://pinatelier.org/ratgeber/pendelleuchten-esstisch/)
+- [ueber-uns](https://pinatelier.org/ueber-uns/)
 
-## Rechtliches
-- Affiliate-Hinweis: https://pinatelier.org/affiliate-hinweis/
-- Impressum: https://pinatelier.org/impressum/
-- Datenschutz: https://pinatelier.org/datenschutz/
+Maßgeblich sind die sichtbaren Seiten und die dort verlinkten Herstellerquellen. Bilder können illustrative Szenen zeigen. Keine Preis- oder Verfügbarkeitsgarantie.

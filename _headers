@@ -2,3 +2,19 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+/measurement
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer
+/measurement.html
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer
+/content/*
+  X-Robots-Tag: noindex
+/scripts/*
+  X-Robots-Tag: noindex
+/pinterest-landing-map.csv
+  X-Robots-Tag: noindex
+/REPORT.md
+  X-Robots-Tag: noindex
+/image-dimensions.json
+  X-Robots-Tag: noindex

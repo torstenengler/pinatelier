@@ -1,6 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /impressum/
-Disallow: /datenschutz/
-Disallow: /affiliate-hinweis/
 Sitemap: https://pinatelier.org/sitemap.xml

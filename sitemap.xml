@@ -1,10 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://pinatelier.org/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-<url><loc>https://pinatelier.org/wohnen/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://pinatelier.org/licht/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://pinatelier.org/kueche/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://pinatelier.org/ordnung/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://pinatelier.org/balkon-garten/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://pinatelier.org/lifestyle/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-</urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://pinatelier.org/</loc></url><url><loc>https://pinatelier.org/licht/</loc></url><url><loc>https://pinatelier.org/wohnen/</loc></url><url><loc>https://pinatelier.org/kueche/</loc></url><url><loc>https://pinatelier.org/ordnung/</loc></url><url><loc>https://pinatelier.org/balkon-garten/</loc></url><url><loc>https://pinatelier.org/lifestyle/</loc></url><url><loc>https://pinatelier.org/ratgeber/</loc></url><url><loc>https://pinatelier.org/ratgeber/designleuchten-sideboard/</loc></url><url><loc>https://pinatelier.org/ratgeber/pendelleuchten-esstisch/</loc></url><url><loc>https://pinatelier.org/ueber-uns/</loc></url></urlset>

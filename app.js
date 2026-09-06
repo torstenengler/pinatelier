@@ -1,7 +1,22 @@
-function affiliateUrl(link){try{const u=new URL(link);if(u.hostname.endsWith('amazon.de')){u.searchParams.set('tag','mrtbuildsmrtpin-21');return u.toString()}return link}catch(e){return link}}
-const state={pins:[],category:'all',board:'all',query:''};
-const grid=document.querySelector('#pinGrid'),results=document.querySelector('#results');
-function categoryFor(pin){const s=((pin.title||'')+' '+(pin.description||'')).toLowerCase();if(/licht|leuchte|lampe|pendel|led|beleucht/.test(s))return'Licht';if(/küche|fritteuse|geschirr|kaffee|kochen|back/.test(s))return'Küche';if(/ordnung|regal|aufbewahr|schrank|box|haken|stauraum/.test(s))return'Ordnung';if(/balkon|garten|terrasse|pflanz|grill/.test(s))return'Balkon & Garten';if(/sport|pickle|geschenk|outfit|tasche|uhr/.test(s))return'Lifestyle';return'Wohnen'}
-function render(){const q=state.query.toLowerCase();const items=state.pins.filter(p=>(state.board==='all'||p.boardKey===state.board)&&(state.category==='all'||p.category===state.category)&&(!q||((p.title||'')+' '+(p.description||'')).toLowerCase().includes(q)));grid.innerHTML=items.length?items.map(p=>'<article class="pin-card"><a href="'+affiliateUrl(p.link)+'" target="_blank" rel="sponsored noopener noreferrer"><div class="pin-image"><img loading="lazy" src="'+p.image+'" alt="'+(p.title||'Ausgewählte Wohnidee').replace(/"/g,'&quot;')+'"></div><div class="pin-body"><span class="pin-category">'+p.category+'</span><h3 class="pin-title">'+(p.title||'Ausgewählte Idee')+'</h3><p class="pin-desc">'+(p.description||'Entdecke diese ausgewählte Idee direkt bei Amazon.')+'</p><span class="pin-link">Bei Amazon ansehen ↗</span></div></a></article>').join(''):'<div class="empty">Keine passenden Pins gefunden. Versuche eine andere Auswahl.</div>';results.textContent=items.length+' '+(items.length===1?'Empfehlung':'Empfehlungen')}
-function bind(){document.querySelectorAll('[data-category]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-category]').forEach(x=>x.classList.remove('active'));b.classList.add('active');state.category=b.dataset.category;render()});document.querySelector('#search').oninput=e=>{state.query=e.target.value;render()};document.querySelector('#boardFilter').onchange=e=>{state.board=e.target.value;render()};document.querySelectorAll('[data-board-jump]').forEach(a=>a.onclick=()=>{state.board=a.dataset.board;document.querySelector('#boardFilter').value=state.board;render()})}
-fetch('pins.json').then(r=>r.json()).then(data=>{state.pins=data.map(p=>({...p,category:categoryFor(p)}));const featured=state.pins.find(p=>p.boardKey==='luxury')||state.pins[0];if(featured){document.querySelector('#heroImage').src=featured.image;document.querySelector('#heroImage').alt=featured.title;document.querySelector('#heroTitle').textContent=featured.title;document.querySelector('#heroCategory').textContent=featured.category+' · Luxus-Wohnideen';document.querySelector('#heroLink').href=affiliateUrl(featured.link);}bind();render()}).catch(()=>grid.innerHTML='<div class="empty">Die Auswahl konnte gerade nicht geladen werden.</div>');
+// Enhance existing HTML. No fetch or dynamic HTML replacement is required.
+(() => {
+  const catalog=document.querySelector('[data-catalog]');
+  if(!catalog)return;
+  const cards=[...catalog.querySelectorAll('.pin-card')];
+  const search=document.querySelector('#search'),board=document.querySelector('#boardFilter');
+  const params=new URLSearchParams(location.search);
+  const state={category:'all',board:['everyday','luxury'].includes(params.get('board'))?params.get('board'):'all',query:params.get('q')||''};
+  const normalize=s=>s.toLocaleLowerCase('de').normalize('NFD').replace(/\p{Diacritic}/gu,'');
+  search.value=state.query;board.value=state.board;
+  const track=(name,data)=>window.paMeasure?.(name,data);
+  function render(){let count=0;for(const card of cards){const visible=(state.category==='all'||card.dataset.category===state.category)&&(state.board==='all'||card.dataset.board===state.board)&&normalize(card.dataset.search).includes(normalize(state.query));card.hidden=!visible;if(visible)count++;}document.querySelector('#results').textContent=count+' von '+cards.length+' Pins';document.querySelector('#empty').hidden=count!==0;document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===state.category)));}
+  function reset(){state.category='all';state.board='all';state.query='';search.value='';board.value='all';render();}
+  document.querySelectorAll('.controls').forEach(x=>x.hidden=false);
+  search.addEventListener('input',()=>{state.query=search.value;render()});
+  board.addEventListener('change',()=>{state.board=board.value;render();track('filter_change',{filter:state.board})});
+  document.querySelector('#reset').addEventListener('click',()=>{reset();track('filter_change',{filter:'reset'})});
+  document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{state.category=b.dataset.filter;render();track('filter_change',{filter:state.category})}));
+  document.querySelectorAll('[data-board-jump]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();reset();state.board=a.dataset.boardJump;board.value=state.board;render();catalog.scrollIntoView();track('filter_change',{filter:state.board})}));
+  function revealPin(){if(!/^#pin-\d+$/.test(location.hash))return;const target=document.getElementById(location.hash.slice(1));if(target){reset();target.setAttribute('tabindex','-1');target.scrollIntoView();target.focus({preventScroll:true})}}
+  render();revealPin();window.addEventListener('hashchange',revealPin);
+})();
