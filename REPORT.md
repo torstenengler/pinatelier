@@ -35,6 +35,14 @@ Automatisierte lokale Chrome-Prüfung bestanden:
 - www.pinatelier.org und pinatelier.pages.dev liefern ebenfalls HTTP 200. Canonicals verweisen auf die Hauptdomain. Dauerhafte hostbasierte Weiterleitungen sind noch offen: Die verfügbaren Cloudflare-Connector-Aktionen bieten hierfür keine passende geprüfte Aktion. Keine DNS-/Sicherheitsregeln auf Verdacht geändert.
 - Cloudflare-Zone aktiv; Bot-Fight-Mode aus; gelistete Legacy-Firewall-Regeln leer. Das ist keine vollständige Prüfung aller möglichen WAF-Regeln. Keine pauschale Änderung von KI-Training, Bot-Schutz oder Sicherheitsrichtlinien.
 
+## Veröffentlichung und abschließender Live-Test
+
+Die Umsetzung wurde mit Commit `44a0f23184d6246daab59a40dd4742a3d892e048` auf dem bestehenden Hauptbranch veröffentlicht und von Cloudflare auf https://pinatelier.org ausgeliefert. Die neuen Ratgeber sind erreichbar, die Startseite enthält 101 Karten und 102 responsive Bildangaben einschließlich Hero. Skript, Stylesheet, robots.txt und Sitemap wurden mit den geprüften lokalen Dateien abgeglichen. Die neue unbekannte Test-URL antwortet mit HTTP 404; das isolierte Messdokument liefert noindex/nofollow.
+
+Der vollständige Browser-Test wurde anschließend gegen die Live-Domain erfolgreich wiederholt: 14 Seiten bei 1440, 390 und 320 Pixel Breite, Suche und Filter, motivgenaue Links, ursprüngliche Affiliate-Ziele, Einwilligung/Abweisung/Widerruf, einmalige Ereignisse, statische Inhalte ohne JavaScript und interne Seitenpfade. Keine JavaScript-Ausnahmen. Der echte Pinterest-Empfang bleibt davon ausdrücklich ausgenommen: Die Pinterest-Bibliothek wurde auch im Live-Test abgefangen, um keine künstlichen Marketingdaten zu senden.
+
+Cloudflare ergänzt wie bisher einen E-Mail-Schutz. Deshalb unterscheidet sich ausgeliefertes HTML an den Kontaktlinks von der lokalen Datei. Dieser bestehende Schutz wurde nicht abgeschaltet; sein bekannter Systempfad ist in der Prüfung der redaktionellen Seitenverlinkung ausgenommen.
+
 ## Pinterest-Ziele und Produktprüfung
 
 `pinterest-landing-map.csv` enthält für jeden Bestands-Pin eine Kategorie-URL mit direktem Produktanker und konsistenten UTM-Werten. Bestehende Pinterest-Pins wurden nicht geändert. Direkte, passende Amazon-Ziele brauchen keinen zusätzlichen Website-Zwischenschritt. Für neue Vergleichs-/Inspirations-Pins:
